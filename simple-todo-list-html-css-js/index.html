@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="main">
+      <h2 class="header">Todo List</h2>
+      <div class="nav">
+        <form>
+          <input type="text" placeholder="Search" />
+          <img src="./search-line.png" />
+        </form>
+
+        <select>
+          <option value="all">All</option>
+          <option value="pending">Pending</option>
+          <option value="completed">completed</option>
+        </select>
+
+        <img class="toggle-mode light" src="./moon-line.png" />
+        <button class="create-task">+</button>
+      </div>
+
+      <div class="task-list"></div>
+    </div>
+    <div class="pop-up pop-up-hidden">
+      <form>
+        <h2 class="header">New Note</h2>
+        <input
+          type="text"
+          placeholder="Input your Note..."
+          class="task-input"
+          required
+        />
+        <div>
+          <button class="cancel">Cancel</button>
+          <button class="apply">Apply</button>
+        </div>
+      </form>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>

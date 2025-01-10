@@ -1,0 +1,201 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: sans-serif;
+}
+
+.main {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  padding-top: 50px;
+  height: 100vh;
+  position: relative;
+}
+
+.create-task {
+  position: absolute;
+  bottom: 50px;
+  right: 20px;
+  background-color: #6c63ff;
+  color: white;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 100%;
+  font-size: 50px;
+  cursor: pointer;
+}
+
+.header {
+  font-size: 26px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.main .nav {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.main .nav form {
+  width: 60%;
+  position: relative;
+}
+
+.main .nav form input {
+  width: 100%;
+  padding: 10px 5px;
+  outline: none;
+}
+
+.main .nav form img {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+}
+
+select {
+  padding: 5px;
+  background-color: #6c63ff;
+  color: white;
+  font-size: 26px;
+  letter-spacing: 2px;
+  outline: none;
+}
+
+.toggle-mode {
+  background-color: #6c63ff;
+  color: white;
+  border: none;
+  color: white;
+  font-size: 26px;
+  letter-spacing: 2px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+/* TODO: FOR THE POP UP PART */
+
+.pop-up {
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.pop-up > form {
+  width: 30%;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.pop-up form input {
+  width: 100%;
+  padding: 10px 5px;
+  outline: none;
+  border: 1px solid #6c63ff;
+  margin-bottom: 100px;
+  border-radius: 10px;
+}
+
+.pop-up form div {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pop-up form div button {
+  font-size: 18px;
+  letter-spacing: 2px;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.pop-up form div .cancel {
+  border: 1px solid #6c63ff;
+}
+
+.pop-up form div .apply {
+  background-color: #6c63ff;
+  color: white;
+}
+
+.pop-up-hidden {
+  display: none;
+}
+
+.task-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+
+  height: 70%;
+}
+
+ul > li {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #ccc;
+  list-style: none;
+}
+
+/* TODO: STYLES ON THE LIST OF TASKS */
+.task-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #6c63ff;
+  list-style: none;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.task-container > span {
+  margin-left: 30px;
+  margin-right: auto;
+}
+
+input[type="checkbox"] {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  color: #6c63ff;
+  border: 1px solid #6c63ff;
+}
