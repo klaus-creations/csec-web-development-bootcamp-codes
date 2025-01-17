@@ -1,5 +1,23 @@
 const toggleMode = document.querySelector(".toggle-mode");
 
+const popUp = document.querySelector(".pop-up");
+
+const body = document.querySelector("body");
+
+let update = false;
+
+popUp.addEventListener("click", function (e) {
+  if (e.target.classList.contains("pop-up")) {
+    popUp.classList.add("pop-up-hidden");
+  }
+});
+
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Escape") {
+    popUp.classList.add("pop-up-hidden");
+  }
+});
+
 const mode = "light";
 
 toggleMode.addEventListener("click", function () {
@@ -19,7 +37,6 @@ toggleMode.addEventListener("click", function () {
 });
 
 // TODO: TOGGLING THE CREATE TASK POP-UP
-const popUp = document.querySelector(".pop-up");
 const createTask = document.querySelector(".create-task");
 createTask.addEventListener("click", function () {
   if (popUp.classList.contains("pop-up-hidden")) {
@@ -40,6 +57,17 @@ const taskList = document.querySelector(".task-list");
 // NOTE: Array Of Task List
 const tasks = [];
 
+// TODO: FILTERING TASK FUNCTIONALITY
+const filterInput = document.querySelector("select");
+
+function filteringTasks() {
+  const filterValue = filterInput.value;
+
+  const filteredTasks = tasks.filter((task) =>
+    task.value.toLowerCase().includes(filterValue.toLowerCase())
+  );
+}
+
 // TODO: FUNCTION TO HANDLE ADDING TASKS
 function addTasks() {
   taskList.innerHTML = "";
@@ -55,14 +83,19 @@ function addTasks() {
     taskContainer.classList.add("task-container");
     taskList.append(taskContainer);
 
+    if (el.completed) taskContainer.classList.add("completed");
+    else taskContainer.classList.remove("completed");
+
     // HACK: CREATE CHECKBOX
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     taskContainer.append(checkbox);
 
+    checkbox.addEventListener("change", () => taskDoneButton(i));
+
     // HACK: CREATE SPAN OF EACH TASK
     const taskItem = document.createElement("span");
-    taskItem.textContent = el + ` #${i}`;
+    taskItem.textContent = el.value + ` #${i}`;
     taskContainer.append(taskItem);
 
     // HACK: CREATE THE DELETE BUTTON
@@ -76,6 +109,8 @@ function addTasks() {
     const updateTask = document.createElement("img");
     updateTask.src = "./edit-line.png";
     taskContainer.append(updateTask);
+
+    updateTask.addEventListener("click", () => updateTask1(i));
   });
 }
 
@@ -85,26 +120,46 @@ const createNewTask = function (newTask) {
     return;
   }
 
-  tasks.push(newTask);
+  const taskElement = {
+    value: newTask,
+    completed: false,
+  };
+
+  tasks.push(taskElement);
   addTasks();
   popUp.classList.add("pop-up-hidden");
 };
 
-const updateTask = function () {};
+const updateTask = function (value, index) {
+  update = true;
+  popUp.classList.remove("pop-up-hidden");
+  // const updatedTask =
+  tasks[index].value = value;
+  addTasks();
+
+  update = false;
+};
 
 const deleteTask = function (taskIndex) {
   tasks.splice(taskIndex, 1);
   addTasks();
 };
 
-function taskDoneButton(value) {}
+function taskDoneButton(index) {
+  tasks[index].completed = !tasks[index].completed;
+  addTasks();
+}
 
 applyButton.addEventListener("click", function (e) {
   e.preventDefault();
   const taskInput = document.querySelector(".task-input");
   const taskText = taskInput.value;
 
-  createNewTask(taskText);
+  if (update) {
+    updateTask(taskText);
+  } else {
+    createNewTask(taskText);
+  }
 
   taskInput.value = "";
 });

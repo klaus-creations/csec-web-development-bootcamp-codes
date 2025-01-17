@@ -199,3 +199,7 @@ input[type="checkbox"] {
   color: #6c63ff;
   border: 1px solid #6c63ff;
 }
+
+.completed {
+  text-decoration: line-through;
+}
