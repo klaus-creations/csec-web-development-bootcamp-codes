@@ -1,8 +1,26 @@
-# React + Vite
+# Reusable Components In React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+In this code I try to create a simple React + Vite app with tailwindccss
+which shows how can we use components multiple times by taking userInputs and render the component multiple time
 
-Currently, two official plugins are available:
+## 🎥 Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Live version: [lanafilms.vercel.app](https://lanafilms.vercel.app)
+
+## 📸 Screenshots
+
+![Homepage](./public/homepage1.png)
+![Homepage](./public/homepage2.png)
+
+## 🛠️ Built With
+
+- **React** – Creating components
+- **Tailwind CSS** – Styling
+
+1. **Fork the repository** by clicking the `Fork` button at the top-right of this page.
+
+### Clone repository:
+
+```sh
+git clone https://github.com/Abush-natanem-12/csec-web-development-bootcamp-codes/tree/main/reusable-component-react-day-one
+```
