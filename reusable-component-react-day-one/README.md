@@ -3,10 +3,6 @@
 In this code I try to create a simple React + Vite app with tailwindccss
 which shows how can we use components multiple times by taking userInputs and render the component multiple time
 
-## 🎥 Demo
-
-Live version: [lanafilms.vercel.app](https://lanafilms.vercel.app)
-
 ## 📸 Screenshots
 
 ![Homepage](./public/homepage1.png)
