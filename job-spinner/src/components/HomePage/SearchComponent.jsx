@@ -1,10 +1,13 @@
+/* eslint-disable react/prop-types */
 import { Search } from "lucide-react";
 
-export default function SearchComponent() {
+export default function SearchComponent({ value, onHandleSearch }) {
   return (
     <form className="w-full lg:w-[55%] 2xl:w-[50%] mx-auto rounded-full h-10 relative shadow-sm shadow-gray-700/[.7]">
       <input
         type="text"
+        value={value}
+        onChange={(e) => onHandleSearch(e)}
         className="w-full height h-full text-gray-500 text-xs tracking-[1px] outline-none border-[1px] border-gray-400/[.5] rounded-2xl px-8"
         placeholder="Job title, Keywords, or Company name | Location"
       />

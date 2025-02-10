@@ -26,13 +26,13 @@ export default function HeaderComponent() {
       <div className="w-[60%] lg:w-[20%] 2xl:w-[15%] flex items-center justify-between">
         <Link
           to={"/sign-in"}
-          className="text-white bg-[#0034D1] text-base px-4 lg:py-px-8 py-1 lg:py-2"
+          className="text-white bg-[#0034D1] text-base px-4 lg:py-px-8 py-1 lg:py-2 rounded-2xl font-bold"
         >
           Login
         </Link>
         <Link
           to={"/sign-in"}
-          className="border-[1px] border-[#0034D1] text-base px-4 lg:py-px-8 py-1 lg:py-2 text-[#0034D1]"
+          className="border-[1px] border-[#0034D1] text-base px-4 lg:py-px-8 py-1 lg:py-2 text-[#0034D1] rounded-2xl font-bold"
         >
           Sign Up
         </Link>
