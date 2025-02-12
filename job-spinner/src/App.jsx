@@ -4,6 +4,8 @@ import ContactUsPage from "./pages/ContactUsPage";
 import LayoutPage from "./pages/LayoutPage";
 import SiginIn from "./pages/SiginInPage";
 import SignUpPage from "./pages/SiginUpPage";
+import { Provider } from "react-redux";
+import store from "./features/store";
 
 const router = createBrowserRouter([
   {
@@ -24,5 +26,9 @@ const router = createBrowserRouter([
 ]);
 
 export default function App() {
-  return <RouterProvider router={router}></RouterProvider>;
+  return (
+    <Provider store={store}>
+      <RouterProvider router={router}></RouterProvider>;
+    </Provider>
+  );
 }

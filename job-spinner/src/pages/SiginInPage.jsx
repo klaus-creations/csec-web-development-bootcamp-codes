@@ -1,3 +1,5 @@
+import SignInComponent from "../components/AuthComponents/SignInComponent";
+
 export default function SiginIn() {
-  return <div>Sigin In Page</div>;
+  return <SignInComponent />;
 }

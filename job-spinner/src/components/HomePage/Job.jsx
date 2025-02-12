@@ -1,4 +1,5 @@
-import { Bookmark, Share2 } from "lucide-react";
+import { Bookmark, BookmarkCheck, Share2 } from "lucide-react";
+import { useSelector } from "react-redux";
 
 /* eslint-disable react/prop-types */
 export default function Job({
@@ -8,7 +9,19 @@ export default function Job({
   description,
   type,
   salary,
+  onHandleAddToSaveJobs,
+  id,
 }) {
+  const job = {
+    logo,
+    title,
+    company,
+    description,
+    type,
+    salary,
+    id,
+  };
+  const savedIds = useSelector((state) => state.slice.savedJobIds);
   return (
     <div className="w-[95%] flex items-start rounded-2xl cursor-pointer px-6 py-4 shadow-md shadow-gray-400 relative gap-4 border-[1px] border-gray-400/[.5]">
       <img className="size-6" alt="company logo" src={logo} />
@@ -34,8 +47,17 @@ export default function Job({
       </div>
 
       <div className="absolute top-4 right-4 flex gap-4 items-center">
-        <button className="text-gray-800 cursor-pointer">
-          <Bookmark className="size-6" />
+        <button
+          className="text-gray-800 cursor-pointer"
+          onClick={() => onHandleAddToSaveJobs(job)}
+        >
+          {savedIds.includes(id) ? (
+            <BookmarkCheck className="size-6 text-gray-950" />
+          ) : (
+            <Bookmark className="size-6" />
+          )}
+
+          {/*  */}
         </button>
         <button className="text-gray-800 cursor-pointer">
           <Share2 className="size-6" />

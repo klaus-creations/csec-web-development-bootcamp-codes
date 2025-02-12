@@ -11,8 +11,6 @@ export const getJobs = async function (page, limit, search = "", company = "") {
     search,
   }).toString();
 
-  console.log(page);
-
   const options = [
     {
       method: "GET",
