@@ -27,3 +27,21 @@ export const getJobs = async function (page, limit, search = "", company = "") {
 
   return res.json();
 };
+
+export const getJobDetail = async function (id) {
+  const options = [
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    },
+  ];
+
+  const res = await fetch(`${API_URL}/${id}`, options);
+  if (!res.ok) {
+    throw new Error(`HTTP error! status: ${res.status}`);
+  }
+
+  return res.json();
+};

@@ -27,7 +27,7 @@ const slices = createSlice({
     addJobs: (state, action) => {
       const newJob = action.payload;
 
-      state.savedJobs = [...state.savedJobs, newJob];
+      state.savedJobs = [newJob, ...state.savedJobs];
       state.savedJobIds = [...state.savedJobIds, newJob.id];
 
       localStorage.setItem("savedJobs", JSON.stringify(state.savedJobs));

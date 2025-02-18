@@ -6,6 +6,7 @@ import Loading from "../commonComponents/Loading";
 import NoResult from "../commonComponents/NoResult";
 import { useDispatch, useSelector } from "react-redux";
 import { addJobs, removeJobs } from "../../features/slices";
+import { useGetJobsQuery } from "../../features/api";
 
 export default function FeedComponent() {
   const value = useSelector((state) => state.slice.searchValue);
@@ -16,6 +17,9 @@ export default function FeedComponent() {
   const [jobs, setJobs] = useState([]);
   const [limit, setLimit] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [temp, setTemp] = useState([]);
+  const res = useGetJobsQuery(limit, 10, value);
+  setTemp(res);
   useEffect(() => {
     async function getFeedJobs() {
       try {
