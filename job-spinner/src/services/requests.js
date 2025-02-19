@@ -1,7 +1,5 @@
 const API_URL = "https://joblisting-rd8f.onrender.com/api/jobs";
 
-//   ?company=&search=&page=1&limit=50
-
 // TODO: APIS CALLS FOR OUR APP
 export const getJobs = async function (page, limit, search = "", company = "") {
   const queryString = new URLSearchParams({

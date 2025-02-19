@@ -12,6 +12,7 @@ export default function Job({
   salary,
   onHandleAddToSaveJobs,
   id,
+  small,
 }) {
   const job = {
     logo,
@@ -36,17 +37,33 @@ export default function Job({
     >
       <img className="size-6" alt="company logo" src={logo} />
       <div className="flex flex-col items-start gap-2">
-        <h2 className="text-gray-700 text-2xl lg:text-3xl tracking-[1px]">
+        <h2
+          className={`text-gray-700 ${
+            !small && "text-2xl lg:text-3xl"
+          } tracking-[1px] ${small & "text-base"}`}
+        >
           {title}
         </h2>
-        <p className="text-gray-500 text-base lg:text-xl tracking-[1px]">
+        <p
+          className={`text-gray-500 ${
+            !small && "text-base lg:text-xl"
+          } tracking-[1px] ${small && "text-xs"}`}
+        >
           {company}
         </p>
         <div className="flex items-center gap-3">
-          <span className="px-2 py-1 bg-gray-200 text-gray-800 text-sm lg:text-base font-thin">
+          <span
+            className={`px-2 py-1 bg-gray-200 text-gray-800 ${
+              !small && "text-sm lg:text-base"
+            } ${small && "text-xs"} font-thin`}
+          >
             {type}
           </span>
-          <span className="px-2 py-1 bg-gray-200 text-gray-800 text-sm lg:text-base font-thin">
+          <span
+            className={`px-2 py-1 bg-gray-200 text-gray-800 ${
+              !small && "text-sm lg:text-base"
+            } ${small && "text-xs"} font-thin`}
+          >
             {salary}
           </span>
         </div>
@@ -59,7 +76,10 @@ export default function Job({
       <div className="absolute top-4 right-4 flex gap-4 items-center">
         <button
           className="text-gray-800 cursor-pointer"
-          onClick={() => onHandleAddToSaveJobs(job)}
+          onClick={(e) => {
+            e.stopPropagation();
+            onHandleAddToSaveJobs(job);
+          }}
         >
           {savedIds.includes(id) ? (
             <BookmarkCheck className="size-6 text-gray-950" />
@@ -69,7 +89,10 @@ export default function Job({
 
           {/*  */}
         </button>
-        <button className="text-gray-800 cursor-pointer">
+        <button
+          className="text-gray-800 cursor-pointer"
+          onClick={(e) => e.stopPropagation()}
+        >
           <Share2 className="size-6" />
         </button>
       </div>

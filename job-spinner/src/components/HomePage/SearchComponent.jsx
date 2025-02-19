@@ -1,6 +1,7 @@
 import { Search } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeSearchValue } from "../../features/slices";
+import { useParams } from "react-router-dom";
 
 export default function SearchComponent() {
   const value = useSelector((state) => state.slice.searchValue);
@@ -9,6 +10,7 @@ export default function SearchComponent() {
     e.preventDefault();
     dispatch(changeSearchValue(e.target.value));
   };
+
   return (
     <form className="w-full lg:w-[55%] 2xl:w-[50%] mx-auto rounded-full h-10 relative shadow-sm shadow-gray-700/[.7]">
       <input
