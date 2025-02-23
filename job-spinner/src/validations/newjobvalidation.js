@@ -16,10 +16,15 @@ export const firstInputvalidations = yup.object({
 
 export const secondInputValidation = yup.object({
   logo: yup.string().required("Please upload a logo"),
-  salary: yup.string().required("please enter the salary of the job"),
+  salary: yup
+    .string()
+    .required("please enter the salary of the job")
+    .matches(/^\d*\.?\d+$/, "Salary must be a number"),
   location: yup
     .string()
     .required("Please enter the location")
     .min(3, "location must be more than 5 character")
     .max(20, "location cannot exceed 40 characters"),
+  experienceLevel: yup.string().required("please enter the experience level"),
+  currency: yup.string().required("please select the currency"),
 });
