@@ -1,19 +1,25 @@
-# Job Spehere
+# Job Sphere
 
-A react Application which we add, bookmark and find jobs
+A React application for adding, bookmarking, and finding jobs.
 
 ## 🛠️ Built With
 
-- **React** – Creating components
-- **Tailwind CSS** – Styling
-  **Redux Toolkit** – For Handling the Global States
-  **Formik** – For Handling The Form State
-  **Yup** – For Handling the validation Schema
+- **React** – For creating components.
+- **Tailwind CSS** – For styling.
+- **Redux Toolkit** – For handling global states.
+- **Formik** – For managing form state.
+- **Yup** – For validation schemas.
 
-1. **Fork the repository** by clicking the `Fork` button at the top-right of this page.
+## Getting Started
 
-### Clone repository:
+### Fork the Repository
+
+1. Click the `Fork` button at the top-right of this page to fork the repository.
+
+### Clone the Repository
+
+Run the following command to clone the repository:
 
 ```sh
-git clone https://github.com/klaus-creations/csec-web-development-bootcamp-codes/tree/main/job-spinner
+git clone https://github.com/klaus-creations/csec-web-development-bootcamp-codes.git
 ```
