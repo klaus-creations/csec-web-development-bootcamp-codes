@@ -1,1 +1,8 @@
 @import "tailwindcss";
+
+body {
+  background-color: #e4e2e2;
+}
+button {
+  cursor: pointer;
+}

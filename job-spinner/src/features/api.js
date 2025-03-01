@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const jobApi = createApi({
   reducerPath: "jobApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://joblisting-rd8f.onrender.com/api/jobs",
+    baseUrl: "https://joblisting-3hjv.onrender.com/api/jobs",
   }),
   endpoints: (builder) => ({
     getJobs: builder.query({
@@ -20,8 +20,21 @@ const jobApi = createApi({
     getJobDetail: builder.query({
       query: (id) => `/${id}`,
     }),
+    postJob: builder.mutation({
+      query: (job) => ({
+        url: "",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: job,
+      }),
+    }),
   }),
 });
 
-export const { useGetJobsQuery, useGetJobDetailQuery } = jobApi;
+export const { useGetJobsQuery, useGetJobDetailQuery, usePostJobMutation } =
+  jobApi;
 export default jobApi;
+
+// https://images.app.goo.gl/wMV6PwUXZLbuuchB8

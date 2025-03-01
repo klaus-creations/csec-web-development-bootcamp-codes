@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
-export default function InputField({ name, type, lab, placeholder }) {
+export default function InputField({ formik, name, type, lab, placeholder }) {
+  const { errors, values, touched, handleChange, handleBlur, ...props } =
+    formik;
   return (
     <div className="w-full flex flex-col items-start gap-2 px-6x">
       <label className="text-xs lg:text-base font-bold tracking-[1px] text-gray-800">
@@ -11,7 +13,13 @@ export default function InputField({ name, type, lab, placeholder }) {
         type={type}
         name={name}
         placeholder={placeholder}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        {...props}
       />
+      {touched[name] && Boolean(errors[name]) && (
+        <span className="text-sm text-red-500">{String(errors[name])}</span>
+      )}
     </div>
   );
 }

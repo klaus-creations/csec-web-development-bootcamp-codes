@@ -43,3 +43,22 @@ export const getJobDetail = async function (id) {
 
   return res.json();
 };
+
+export const postJob = async function (job) {
+  const options = [
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(job),
+    },
+  ];
+
+  const res = await fetch(API_URL, options);
+  if (!res.ok) {
+    throw new Error(`HTTP error! status: ${res.status}`);
+  }
+
+  return res.json();
+};

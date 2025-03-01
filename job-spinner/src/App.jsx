@@ -7,6 +7,7 @@ import SignUpPage from "./pages/SiginUpPage";
 import { Provider } from "react-redux";
 import store from "./features/store";
 import DetailPage from "./pages/DetailPage";
+import CreateNewJobPage from "./pages/CreateNewJobPage";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
     path: "/sign-up",
     element: <SignUpPage />,
   },
+  { path: "/job/new", element: <CreateNewJobPage /> },
 ]);
 
 export default function App() {

@@ -15,6 +15,22 @@ const initialState = {
   savedJobIds: savedJobIdsFromLocalStorage,
   data: userData,
   auth: logged,
+  jobData1: {
+    title: "",
+    description: "",
+    type: "",
+    company: "",
+  },
+  jobData2: {
+    salary: "",
+    location: "",
+    logo: "",
+    experienceLevel: "",
+    currency: "",
+    isBookMarked: false,
+  },
+  jobs: {},
+  newJobPage: 1,
 };
 
 const slices = createSlice({
@@ -56,9 +72,29 @@ const slices = createSlice({
       state.auth = action.payload;
       localStorage.setItem("logged", JSON.stringify(state.auth));
     },
+    setJobData1: (state, action) => {
+      state.jobData1 = action.payload;
+    },
+    setJobData2: (state, action) => {
+      state.jobData2 = action.payload;
+    },
+    setJobs: (state, action) => {
+      state.jobs = action.payload;
+    },
+    setJobPage: (state, action) => {
+      state.newJobPage = action.payload;
+    },
   },
 });
 
 export default slices.reducer;
-export const { changeSearchValue, addJobs, removeJobs, setData, toggleLogged } =
-  slices.actions;
+export const {
+  changeSearchValue,
+  addJobs,
+  removeJobs,
+  setData,
+  toggleLogged,
+  setJobData1,
+  setJobData2,
+  setJobPage,
+} = slices.actions;

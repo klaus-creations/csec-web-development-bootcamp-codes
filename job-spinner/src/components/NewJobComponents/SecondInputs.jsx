@@ -11,16 +11,25 @@ export default function SecondInputs() {
   const jobData = useSelector((state) => state.slice.jobData2);
   const jobData1 = useSelector((state) => state.slice.jobData1);
   const navigate = useNavigate();
-  const [postJob, { isLoading, isError, error }] = usePostJobMutation();
+  const [postJob, { isLoading }] = usePostJobMutation();
 
   const formik = useFormik({
     initialValues: jobData || {},
     onSubmit: async (values) => {
       dispatch(setJobData2(values));
-      const totalJob = { ...jobData1, ...values };
+      let totalJob = {
+        ...jobData1,
+        ...values,
+      };
 
       try {
-        await postJob(totalJob).unwrap();
+        const submitData = {
+          ...totalJob,
+          salary: Number(totalJob.salary),
+        };
+        console.log(submitData);
+        await postJob(submitData).unwrap();
+
         navigate("/");
       } catch (error) {
         console.log(error.message || error);
