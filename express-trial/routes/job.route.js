@@ -11,6 +11,6 @@ const jobRouter = Router();
 jobRouter.get("/", getJobs);
 jobRouter.get("/:jobId", getSingleJob);
 jobRouter.post("/new", postJob);
-jobRouter.delete("/delete/:id", deleteJob);
+jobRouter.delete("/delete/:jobId", deleteJob);
 
 export default jobRouter;
