@@ -25,3 +25,5 @@ app.post("/post", (req, res) => {
 });
 
 app.listen(3000, () => console.log("server is running on port 3000"));
+
+console.log("Hello world this is not the first time when I uxe this thing");
