@@ -8,10 +8,6 @@ import jobRouter from "./routes/job.route.js";
 const app = express();
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("Hello world");
-});
-
 app.use("/api/jobs/", jobRouter);
 
 app.listen(PORT, async function () {
