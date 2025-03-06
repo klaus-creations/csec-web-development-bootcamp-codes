@@ -1,14 +1,34 @@
 import jobModel from "../models/job.model.js";
 
 export const getJobs = async function (req, res) {
+  const { query = "", limit = 10, page = 1 } = req.query;
+  const pageNumber = parseInt(page);
+  const limitNumber = parseInt(limit);
+  const skip = (pageNumber - 1) * limitNumber;
+
   try {
-    const jobs = await jobModel.find();
+    let filter = {};
+
+    if (query.trim().length > 0) {
+      filter = {
+        $or: [
+          { title: { $regex: query, $options: "i" } },
+          { company: { $regex: query, $options: "i" } },
+          { location: { $regex: query, $options: "i" } },
+        ],
+      };
+    }
+
+    const jobs = await jobModel.find(filter).skip(skip).limit(limitNumber);
     res.send({
       success: true,
       data: jobs,
     });
   } catch (error) {
-    res.send({ success: false, message: error.message || error });
+    res.send({
+      success: false,
+      message: "Error happened while getting the jobs" + error.message || error,
+    });
   }
 };
 
