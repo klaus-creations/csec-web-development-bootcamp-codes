@@ -94,9 +94,8 @@ export const deleteJob = async function (req, res) {
 export const updateJob = async function (req, res) {
   const { jobId } = req.params;
   const updateData = req.body;
-
   try {
-    const updatedJob = await Job.findByIdAndUpdate(jobId, updateData, {
+    const updatedJob = await jobModel.findByIdAndUpdate(jobId, updateData, {
       new: true,
     });
 
