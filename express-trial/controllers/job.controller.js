@@ -2,7 +2,6 @@ import jobModel from "../models/job.model.js";
 
 export const getJobs = async function (req, res) {
   try {
-    console.log("hello");
     const jobs = await jobModel.find();
     res.send({
       success: true,
@@ -90,4 +89,27 @@ export const deleteJob = async function (req, res) {
     message: true,
     message: "you successfully delete the job",
   });
+};
+
+export const updateJob = async function (req, res) {
+  const { jobId } = req.params;
+  const updateData = req.body;
+
+  try {
+    const updatedJob = await Job.findByIdAndUpdate(jobId, updateData, {
+      new: true,
+    });
+
+    if (!updatedJob) {
+      return res.status(404).json({ message: "Job not found" });
+    }
+
+    res
+      .status(200)
+      .json({ message: "Job updated successfully", data: updatedJob });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error updating job", error: error.message });
+  }
 };
