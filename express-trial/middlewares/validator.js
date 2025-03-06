@@ -38,8 +38,14 @@ export const validateJob = [
   body("salary")
     .notEmpty()
     .withMessage("Salary is required")
+    .custom((value) => {
+      if (typeof value !== "number") {
+        throw new Error("Salary must be a number");
+      }
+      return true;
+    })
     .isInt({ min: 0 })
-    .withMessage("Salary must be a positive number"),
+    .withMessage("Salary must be a positive integer"),
 
   body("description")
     .notEmpty()
