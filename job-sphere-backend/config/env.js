@@ -1,4 +1,4 @@
 import { config } from "dotenv";
 
-config({ path: `.env.local` });
+config({ path: `.env` });
 export const { PORT, DB_URI } = process.env;
