@@ -12,6 +12,8 @@ export default function DetailComponent() {
   if (value) {
     navigate("/");
   }
+
+  const jobDetail = detail?.data;
   return (
     <>
       {error ? (
@@ -27,14 +29,14 @@ export default function DetailComponent() {
                */}
               <div className="w-full  flex justify-between items-center gap-4 px-5 py-3">
                 <div className="flex items-center gap-8">
-                  <img className="w-16" src={detail.logo} alt="logo" />
+                  <img className="w-16" src={jobDetail.logo} alt="logo" />
                   <div className="flex flex-col items-start gap-1">
                     <h2 className="text-xl lg:text-2xl text-gray-800 font-bold tracking-[1px]">
-                      {detail.title}
+                      {jobDetail.title}
                     </h2>
 
                     <span className="text-base lg:text-xl font-bold tracking-[1px] text-gray-800">
-                      {detail?.company}
+                      {jobDetail?.company}
                     </span>
                   </div>
                 </div>
@@ -69,7 +71,7 @@ export default function DetailComponent() {
                       Job Type :
                     </span>
                     <span className="text-xs lg:text-base  text-gray-600">
-                      {detail.type || "Full Time"}
+                      {jobDetail.type || "Full Time"}
                     </span>
                   </div>
 
@@ -78,7 +80,7 @@ export default function DetailComponent() {
                       Location:
                     </span>
                     <span className="text-xs lg:text-base  text-gray-600">
-                      {detail?.location || "london"}
+                      {jobDetail?.location || "london"}
                     </span>
                   </div>
 
@@ -87,7 +89,7 @@ export default function DetailComponent() {
                       Experience:
                     </span>
                     <span className="text-xs lg:text-base  text-gray-600">
-                      {detail?.experienceLevel || "Entr Level"}
+                      {jobDetail?.experienceLevel || "Entr Level"}
                     </span>
                   </div>
 

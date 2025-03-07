@@ -23,10 +23,10 @@ export default function FeedComponent() {
   } = useGetJobsQuery({
     page,
     limit,
-    search: value,
+    query: value,
   });
 
-  const jobs = data?.jobs || [];
+  const jobs = data?.data || [];
 
   const handleClick = (increase) => {
     if (increase) {
@@ -60,14 +60,14 @@ export default function FeedComponent() {
         {jobs.length > 0 ? (
           jobs.map((job) => (
             <Job
-              key={job.id}
+              key={job._id}
               title={job.title}
               logo={job.logo}
               company={job.company}
               description={job.description}
               type={job.type}
               salary={job.salary}
-              id={job.id}
+              id={job._id}
               onHandleAddToSaveJobs={addToSaveJobs}
               small={false}
             />

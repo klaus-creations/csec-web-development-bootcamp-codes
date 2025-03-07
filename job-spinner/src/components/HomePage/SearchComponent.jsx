@@ -1,7 +1,6 @@
 import { Search } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeSearchValue } from "../../features/slices";
-import { useParams } from "react-router-dom";
 
 export default function SearchComponent() {
   const value = useSelector((state) => state.slice.searchValue);
