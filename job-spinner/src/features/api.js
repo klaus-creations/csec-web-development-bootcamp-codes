@@ -3,17 +3,19 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const jobApi = createApi({
   reducerPath: "jobApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://joblisting-3hjv.onrender.com/api/jobs",
+    baseUrl:
+      "https://csec-web-development-bootcamp-codes.onrender.com/api/jobs",
   }),
   endpoints: (builder) => ({
     getJobs: builder.query({
-      query: ({ page, limit, search = "", company = "" }) => {
+      query: ({ page, limit, query = "", company = "" }) => {
         const queryParams = new URLSearchParams({
           page,
           limit,
-          search,
+          query,
           company,
         }).toString();
+        console.log(queryParams);
         return `?${queryParams}`;
       },
     }),
@@ -22,7 +24,7 @@ const jobApi = createApi({
     }),
     postJob: builder.mutation({
       query: (job) => ({
-        url: "",
+        url: "/new",
         method: "POST",
         headers: {
           "Content-Type": "application/json",
