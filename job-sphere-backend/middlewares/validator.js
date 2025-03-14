@@ -1,11 +1,24 @@
 import { body, validationResult } from "express-validator";
 
-export const validateUser = [
+export const signUpValidations = [
   body("name")
     .notEmpty()
     .withMessage("Name is required")
     .isLength({ min: 5 })
     .withMessage("Name must be at least 5 characters long"),
+  body("email")
+    .notEmpty()
+    .withMessage("Email is required")
+    .isEmail()
+    .withMessage("Invalid email address"),
+  body("password")
+    .notEmpty()
+    .withMessage("Age is required")
+    .isLength({ min: 8 })
+    .withMessage("Password must be at least 5 characters long"),
+];
+
+export const signInValidations = [
   body("email")
     .notEmpty()
     .withMessage("Email is required")
