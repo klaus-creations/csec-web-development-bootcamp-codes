@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use("/api/jobs/", jobRouter);
-app.use("/api/auth", authRouter);
+app.use("/api/auth/", authRouter);
 
 app.listen(PORT, async function () {
   console.log(`Server running on port ${PORT} port`);
