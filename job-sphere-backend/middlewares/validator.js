@@ -11,11 +11,11 @@ export const validateUser = [
     .withMessage("Email is required")
     .isEmail()
     .withMessage("Invalid email address"),
-  body("age")
+  body("password")
     .notEmpty()
     .withMessage("Age is required")
-    .isInt({ min: 1 })
-    .withMessage("Age must be a positive number"),
+    .isLength({ min: 8 })
+    .withMessage("Password must be at least 5 characters long"),
 ];
 
 export const validateJob = [
