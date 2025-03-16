@@ -33,18 +33,26 @@ export const getJobs = async function (req, res) {
 };
 
 export const postJob = async function (req, res) {
+  console.log(req.file);
+
+  if (!req.file) {
+    throw new Error("No file to upload");
+  }
+
+  const uploadName = "logo-" + Date.now() + "-" + req.file.originalname;
+  const parsedBody = { ...req.body, file: uploadName };
   const {
     title,
     type,
     salary,
     description,
     company,
-    logo,
+    file,
     isBookMarked,
     location,
     experienceLevel,
     currency,
-  } = req.body;
+  } = parsedBody;
 
   if (
     !title ||
@@ -52,17 +60,17 @@ export const postJob = async function (req, res) {
     !salary ||
     !description ||
     !company ||
-    !logo ||
+    !file ||
     !isBookMarked ||
     !location ||
     !experienceLevel ||
     !currency
   ) {
-    res.send({
-      success: false,
-      message: "please enter all the required fields",
-    });
-    return;
+    throw new Error("Please enter all the required fields");
+  }
+
+  if (!req.file) {
+    throw new Error("No file to upload");
   }
 
   await jobModel.create({
@@ -71,7 +79,7 @@ export const postJob = async function (req, res) {
     salary,
     description,
     company,
-    logo,
+    file: req.file.filename,
     isBookMarked,
     location,
     experienceLevel,

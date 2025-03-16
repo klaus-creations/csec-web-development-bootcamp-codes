@@ -90,3 +90,27 @@ export const signIn = async (req, res, next) => {
 };
 
 export const signOut = async (req, res, next) => {};
+
+export const isAuthenticated = async function (req, res, next) {
+  const user = req.user;
+  try {
+    if (!user) {
+      throw new Error("No user is found");
+    }
+    res.status(200).json({ success: true, data: user });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const isAdmin = async function (req, res, next) {
+  const user = req.user;
+  try {
+    if (!user) {
+      throw new Error("No user is found");
+    }
+    res.status(200).json({ success: true });
+  } catch (error) {
+    next(error);
+  }
+};
