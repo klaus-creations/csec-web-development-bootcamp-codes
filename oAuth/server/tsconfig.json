@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "strictBindCallApply": true,
+    "esModuleInterop": true,
+    "strictNullChecks": true,
+    "declarationMap": false,
+    "removeComments": true,
+    "noImplicitAny": false,
+    "skipLibCheck": true,
+    "declaration": false,
+    "incremental": true,
+    "sourceMap": true,
+    "allowJs": true,
+    "target": "es2015",
+    "strict": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "noEmit": false,
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    }
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
