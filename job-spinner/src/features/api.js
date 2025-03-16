@@ -3,8 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const jobApi = createApi({
   reducerPath: "jobApi",
   baseQuery: fetchBaseQuery({
-    baseUrl:
-      "https://csec-web-development-bootcamp-codes.onrender.com/api/jobs",
+    baseUrl: "http://localhost:5000/api",
   }),
   endpoints: (builder) => ({
     getJobs: builder.query({
@@ -15,16 +14,15 @@ const jobApi = createApi({
           query,
           company,
         }).toString();
-        console.log(queryParams);
-        return `?${queryParams}`;
+        return `/jobs?${queryParams}`;
       },
     }),
     getJobDetail: builder.query({
-      query: (id) => `/${id}`,
+      query: (id) => `/jobs/${id}`,
     }),
     postJob: builder.mutation({
       query: (job) => ({
-        url: "/new",
+        url: "/jobs/new",
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -32,11 +30,54 @@ const jobApi = createApi({
         body: job,
       }),
     }),
+    createUser: builder.mutation({
+      query: (data) => ({
+        url: "/auth/sign-up",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: data,
+      }),
+    }),
+    loginUser: builder.mutation({
+      query: (data) => ({
+        url: "/auth/sign-in",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: data,
+      }),
+    }),
+    isAuthenticated: builder.query({
+      query: (token) => ({
+        url: "/auth/is-auth",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+    }),
+    isAdmin: builder.query({
+      query: (token) => ({
+        url: "/auth/is-auth",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+    }),
   }),
 });
 
-export const { useGetJobsQuery, useGetJobDetailQuery, usePostJobMutation } =
-  jobApi;
+export const {
+  useGetJobsQuery,
+  useGetJobDetailQuery,
+  usePostJobMutation,
+  useCreateUserMutation,
+  useLoginUserMutation,
+  useIsAuthenticatedQuery,
+  useIsAdminQuery,
+} = jobApi;
 export default jobApi;
 
 // https://images.app.goo.gl/wMV6PwUXZLbuuchB8

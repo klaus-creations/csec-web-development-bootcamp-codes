@@ -1,9 +1,19 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SavedJob from "./SavedJob";
+import { useIsAuthenticatedQuery } from "../../features/api";
+import { toggleLogged } from "../../features/slices";
 
 export default function SavedComponent() {
   const jobs = useSelector((state) => state.slice.savedJobs);
   const loggedin = useSelector((state) => state.slice.auth);
+  const token = useSelector((state) => state.slice.userData);
+  const { data } = useIsAuthenticatedQuery(token?.token);
+
+  const dispatch = useDispatch();
+
+  if (data?.success) {
+    dispatch(toggleLogged(true));
+  }
   return (
     <>
       {loggedin ? (

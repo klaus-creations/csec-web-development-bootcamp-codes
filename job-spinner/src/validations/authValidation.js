@@ -22,7 +22,6 @@ export const signupValidation = yup.object({
     .string()
     .required("Password is required")
     .min(6, "Password must be at least 6 characters")
-    .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
     .matches(/\d/, "Password must contain at least one number"),
 
   confirmPassword: yup
@@ -37,10 +36,5 @@ export const signinValidation = yup.object({
     .required("Email is required")
     .email("Invalid email format"),
 
-  password: yup
-    .string()
-    .required("Password is required")
-    .min(6, "Password must be at least 6 characters")
-    .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
-    .matches(/\d/, "Password must contain at least one number"),
+  password: yup.string().required("Password is required"),
 });

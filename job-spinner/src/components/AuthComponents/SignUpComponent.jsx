@@ -1,40 +1,62 @@
 import { Lock, Mail, User } from "lucide-react";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { setData, toggleLogged } from "../../features/slices";
+import { useFormik } from "formik";
+import { signupValidation } from "../../validations/authValidation";
+import { useCreateUserMutation } from "../../features/api";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserData } from "../../features/slices";
 
 export default function SignUpComponent() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [createUser, { isLoading }] = useCreateUserMutation();
+  const [data, setData] = useState(null);
+  const signUpData = useSelector((state) => state.slice.signupData);
+  const dispatch = useDispatch();
+  const {
+    errors,
+    values,
+    touched,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    resetForm,
+  } = useFormik({
+    initialValues: signUpData,
+    onSubmit: async (values) => {
+      try {
+        const userData = {
+          name: values.firstName + " " + values.lastName,
+          email: values.email,
+          password: values.password,
+        };
+        const response = await createUser(userData);
+        resetForm();
+        setData(response);
 
-  const handleSubmitForm = function (e) {
-    e.preventDefault();
-    if (!firstName || !lastName || !email || !password || !confirmPassword) {
-      alert("All fields are required");
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      alert("Passwords do not match");
-      return;
-    }
-
-    dispatch(setData({ firstName, lastName, email, password }));
-    dispatch(toggleLogged(true));
-    navigate("/");
-  };
+        if (response?.data) {
+          const userData = response.data.data;
+          localStorage.setItem("token", userData?.token);
+          dispatch(
+            setUserData({
+              token: userData?.token,
+              name: userData?.user.name,
+            })
+          );
+          navigate("/");
+        }
+      } catch (error) {
+        console.log(error.message || error);
+      }
+    },
+    validationSchema: signupValidation,
+    enableReinitialize: true,
+  });
 
   return (
     <div className="w-full flex justify-between h-screen">
       <form
-        onSubmit={handleSubmitForm}
+        onSubmit={handleSubmit}
         className="w-[90%] md:w-[80%] xl:w-[80%] 2xl:w-[50%] mx-auto h-full flex justify-center items-center "
       >
         <div className="w-95% md:w-[90%] lg:w-[70%] mx-auto flex flex-col items-start gap-5">
@@ -47,72 +69,133 @@ export default function SignUpComponent() {
           </h3>
 
           <div className="w-full flex flex-col gap-3">
-            <div className="w-full h-12 relative">
-              <input
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-                type="text"
-                placeholder="First Name"
-                className="size-full outline-none border-[1px] border-gray-700/[.4] rounded-lg px-10 text-gray-600"
-              />
+            <div className="w-full min-h-12 relative flex flex-col gap-1">
+              <div className="w-full h-12 relative">
+                <input
+                  name="firstName"
+                  value={values["firstName"]}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  type="text"
+                  placeholder="First Name"
+                  className="size-full outline-none border-[1px] border-gray-700/[.4] rounded-lg px-10 text-gray-600"
+                />
 
-              <User className="size-6 absolute top-[50%] -translate-y-[50%] text-gray-400 left-2" />
+                <User className="size-6 absolute top-[50%] -translate-y-[50%] text-gray-400 left-2" />
+              </div>
+
+              {errors["firstName"] && touched["firstName"] && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors["firstName"]}
+                </p>
+              )}
             </div>
 
-            <div className="w-full h-12 relative">
-              <input
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-                type="text"
-                placeholder="Last Name Name"
-                className="size-full outline-none border-[1px] border-gray-700/[.4] rounded-lg px-10 text-gray-600"
-              />
+            <div className="w-full min-h-12 relative flex flex-col gap-1">
+              <div className="w-full h-12 relative">
+                <input
+                  name="lastName"
+                  value={values["lastName"]}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  type="text"
+                  placeholder="Last Name Name"
+                  className="size-full outline-none border-[1px] border-gray-700/[.4] rounded-lg px-10 text-gray-600"
+                />
 
-              <User className="size-6 absolute top-[50%] -translate-y-[50%] text-gray-400 left-2" />
+                <User className="size-6 absolute top-[50%] -translate-y-[50%] text-gray-400 left-2" />
+              </div>
+              {errors["lastName"] && touched["lastName"] && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors["lastName"]}
+                </p>
+              )}
             </div>
 
-            <div className="w-full h-12 relative">
-              <input
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                type="email"
-                placeholder="Email Address"
-                className="size-full outline-none border-[1px] border-gray-700/[.4] rounded-lg px-10 text-gray-600"
-              />
+            <div className="w-full min-h-12 relative flex flex-col gap-1">
+              <div className="w-full h-12 relative">
+                <input
+                  name="email"
+                  value={values["email"]}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  type="email"
+                  placeholder="Email Address"
+                  className="size-full outline-none border-[1px] border-gray-700/[.4] rounded-lg px-10 text-gray-600"
+                />
 
-              <Mail className="size-6 absolute top-[50%] -translate-y-[50%] text-gray-400 left-2" />
+                <Mail className="size-6 absolute top-[50%] -translate-y-[50%] text-gray-400 left-2" />
+              </div>
+              {errors["email"] && touched["email"] && (
+                <p className="text-red-500 text-xs mt-1">{errors["email"]}</p>
+              )}
             </div>
 
-            <div className="w-full h-12 relative">
-              <input
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                type="text"
-                placeholder="Password"
-                className="size-full outline-none border-[1px] border-gray-700/[.4] rounded-lg px-10 text-gray-600"
-              />
+            <div className="w-full min-h-12 relative flex flex-col gap-1">
+              <div className="w-full h-12 relative">
+                <input
+                  name="password"
+                  value={values["password"]}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  type="text"
+                  placeholder="Password"
+                  className="size-full outline-none border-[1px] border-gray-700/[.4] rounded-lg px-10 text-gray-600"
+                />
 
-              <Lock className="size-6 absolute top-[50%] -translate-y-[50%] text-gray-400 left-2" />
+                <Lock className="size-6 absolute top-[50%] -translate-y-[50%] text-gray-400 left-2" />
+              </div>
+              {errors["password"] && touched["password"] && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors["password"]}
+                </p>
+              )}
             </div>
 
-            <div className="w-full h-12 relative">
-              <input
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                type="password"
-                placeholder="Confirm Password"
-                className="size-full outline-none border-[1px] border-gray-700/[.4] rounded-lg px-10 text-gray-600"
-              />
+            <div className="w-full min-h-12 relative flex flex-col gap-1">
+              <div className="w-full h-12 relative">
+                <input
+                  name="confirmPassword"
+                  value={values["confirmPassword"]}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  type="password"
+                  placeholder="Confirm Password"
+                  className="size-full outline-none border-[1px] border-gray-700/[.4] rounded-lg px-10 text-gray-600"
+                />
 
-              <Lock className="size-6 absolute top-[50%] -translate-y-[50%] text-gray-400 left-2" />
+                <Lock className="size-6 absolute top-[50%] -translate-y-[50%] text-gray-400 left-2" />
+              </div>
+              {errors["confirmPassword"] && touched["confirmPassword"] && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors["confirmPassword"]}
+                </p>
+              )}
             </div>
+            {data?.error && (
+              <p className="text-red-500 text-xs mt-1">
+                {data?.error.data.error}
+              </p>
+            )}
           </div>
 
           <button
             type="submit"
-            className="font-bold text-base lg:text-xl tracking-[1px] text-white bg-[#0034D1] hover:bg-[#0034D1]/[.8] w-full py-4 cursor-pointer"
+            disabled={isLoading}
+            className="font-bold text-base lg:text-xl tracking-[1px] text-white bg-[#0034D1] hover:bg-[#0034D1]/[.8] w-full py-4 cursor-pointer relative"
           >
-            Create Account
+            {isLoading ? (
+              <span className="flex items-center gap-1 justify-center">
+                Loading...
+                <img
+                  src="/spinner.svg"
+                  alt="loading spinner"
+                  className="size-5 text-white"
+                />
+              </span>
+            ) : (
+              <span>Create Account</span>
+            )}
           </button>
           <div className="w-full relative flex items-center justify-center">
             <p className="text-base lg:text-2xl font-bold uppercase tracking-[1px] text-gray-950">

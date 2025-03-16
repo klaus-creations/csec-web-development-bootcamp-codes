@@ -7,6 +7,8 @@ const savedJobIdsFromLocalStorage =
 
 const userData = JSON.parse(localStorage.getItem("data")) || {};
 
+const token = localStorage.getItem("token") || null;
+
 const logged = JSON.parse(localStorage.getItem("logged")) || false;
 
 const initialState = {
@@ -31,6 +33,26 @@ const initialState = {
   },
   jobs: {},
   newJobPage: 1,
+  loginData: {
+    name: "",
+    email: "",
+  },
+  signupData: {
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  },
+  signInData: {
+    email: "",
+    password: "",
+  },
+
+  userData: {
+    token,
+    name: "",
+  },
 };
 
 const slices = createSlice({
@@ -84,6 +106,10 @@ const slices = createSlice({
     setJobPage: (state, action) => {
       state.newJobPage = action.payload;
     },
+
+    setUserData: (state, action) => {
+      state.userData = action.payload;
+    },
   },
 });
 
@@ -97,4 +123,5 @@ export const {
   setJobData1,
   setJobData2,
   setJobPage,
+  setUserData,
 } = slices.actions;

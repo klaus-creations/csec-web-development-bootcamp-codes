@@ -5,6 +5,8 @@ import InputField from "./InputField";
 import { setJobData2 } from "../../features/slices";
 import { useNavigate } from "react-router-dom";
 import { usePostJobMutation } from "../../features/api";
+import { useState } from "react";
+import { Upload } from "lucide-react";
 
 export default function SecondInputs() {
   const dispatch = useDispatch();
@@ -39,6 +41,15 @@ export default function SecondInputs() {
     enableReinitialize: true,
   });
 
+  const [fileName, setFileName] = useState("");
+
+  const handleFileChange = (event) => { 
+    const file = event.target.files[0];
+    if (file) {
+      setFileName(file.name);
+    }
+  };
+
   return (
     <form
       onSubmit={formik.handleSubmit}
@@ -57,13 +68,6 @@ export default function SecondInputs() {
         type="text"
         lab="location"
         placeholder={"Enter location"}
-      />
-      <InputField
-        formik={formik}
-        name="logo"
-        logo="file"
-        lab="Job logo"
-        placeholder={"Enter Job logo"}
       />
       <InputField
         formik={formik}
@@ -91,6 +95,18 @@ export default function SecondInputs() {
           { value: "pound", label: "POUND" },
         ]}
       />
+
+      <div className="flex flex-col items-center gap-4">
+        <label className="flex items-center justify-center w-64 px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-blue-500 transition">
+          <input type="file" className="hidden" onChange={handleFileChange} />
+          <div className="flex items-center gap-2">
+            <Upload className="w-6 h-6 text-gray-500" />
+            <span className="text-gray-600 text-sm">
+              {fileName || "Add Logo..."}
+            </span>
+          </div>
+        </label>
+      </div>
 
       <div className="w-full flex items-center justify-between">
         <button
