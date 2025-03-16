@@ -10,8 +10,8 @@ const storage = multer.diskStorage({
     cb(null, path.join(__dirname, "../public/avatars"));
   },
   filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, uniqueSuffix + path.extname(file.originalname)); // Unique file name
+    const uniqueSuffix = "logo-" + Date.now() + "-" + file.originalname;
+    cb(null, uniqueSuffix + path.extname(file.originalname));
   },
 });
 
