@@ -76,11 +76,7 @@ export const validateJob = [
     .isLength({ min: 2, max: 50 })
     .withMessage("Company name must be between 2 and 50 characters"),
 
-  body("logo")
-    .notEmpty()
-    .withMessage("Logo URL is required")
-    .isURL()
-    .withMessage("Logo must be a valid URL"),
+  body("file").notEmpty().withMessage("Logo URL is required"),
 
   body("isBookMarked")
     .notEmpty()
