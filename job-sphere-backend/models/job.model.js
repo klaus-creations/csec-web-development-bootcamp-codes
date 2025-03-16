@@ -23,7 +23,7 @@ const jobSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    logo: {
+    file: {
       type: String,
       required: true,
     },
